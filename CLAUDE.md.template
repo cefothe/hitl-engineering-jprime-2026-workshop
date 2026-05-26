@@ -1,0 +1,98 @@
+# CLAUDE.md
+
+> This is the workshop scaffold. During the workshop we will copy this to
+> `CLAUDE.md` and fill in the `[TODO]` sections together with the room.
+> The `[PRE-DECIDED]` sections are non-negotiable — they encode the
+> architectural choices that make this demo work.
+
+---
+
+## Project
+
+[TODO: one-line description of what this project is]
+
+[TODO: paragraph — why this exists, business context. See PRD.md.]
+
+The full brief lives in [`PRD.md`](./PRD.md). Read it before doing anything.
+
+---
+
+## Architecture constraints [PRE-DECIDED]
+
+This system is split into three paths. Each has its own framework choice. **The boundary is not a suggestion.**
+
+- **Hot path** — the webhook `POST` handler and anything in its synchronous call chain (signature verification, durable write, ACK).
+  - **Pure Java 21. No framework.**
+  - JDK `HttpServer` or Helidon Níma. No Spring, no DI container, no AOP, no framework-driven annotations (`@Component`, `@Autowired`, `@RestController`, `@Service`, `@Bean`, etc.).
+  - Lives under `src/ingress/` (or equivalent — see Build structure below).
+  - Justification: ACK in <5s with low operational footprint and minimal blast radius. Spring would *work*; we are choosing separation deliberately.
+
+- **Warm path** — event processing, retries, persistence, idempotency tracking.
+  - **Spring Boot 3.x.**
+  - Spring Data, `@Scheduled`, transactional boundaries via Spring.
+  - Justification: developer velocity dominates here; latency tolerance is high.
+
+- **Cold path** — admin endpoints, reconciliation jobs, DLQ inspection.
+  - **Spring Boot 3.x.** Same reasoning as warm path.
+
+**Build structure:** [TODO — multi-module Maven, or single-module with package enforcement. Room decides.]
+
+**If you are tempted to add Spring to the hot path: STOP and ask the human. This is a hard rule, not a guideline.**
+
+---
+
+## HITL checkpoints [PRE-DECIDED — agent must STOP at each]
+
+Before any of the following, present 2–3 options to the human with trade-offs, and wait for a decision. Do not decide alone.
+
+- **Choosing the data store** (Postgres? SQLite? Embedded H2? Something else?)
+- **Designing PayHub `customer_id` → internal `user_id` mapping** (does the mapping exist? How is it populated? What happens to orphans?)
+- **Deciding event retention period** (the PRD says *"a while"* — that is not an answer)
+- **Adding any logic that handles out-of-order events** (architectural fork — needs human input)
+- **Claiming the work is done** (verify against the PRD's success metrics before declaring victory)
+
+---
+
+## PRD interpretation rules [PRE-DECIDED]
+
+- The PRD's "Open questions" section is exactly that — **open**. Do not answer them yourself. Ask.
+- If the PRD is silent on something architecturally significant, **ask, don't infer**.
+- The PRD's "Success metrics" section is the acceptance criteria. Do not declare done until each one is satisfied or explicitly flagged as out of scope for v0.
+- If you find an internal contradiction in the PRD, **surface it**. Do not silently resolve.
+
+---
+
+## Conventions [TODO — room decides during workshop]
+
+- **Package structure:** [TODO]
+- **Logging:** structured (JSON). **Never log PII** — no customer email, name, address, billing details, or full event payloads at INFO level. Use IDs.
+- **Test requirements:** [TODO — at minimum: unit tests on the hot path, integration tests on the warm path]
+- **Error handling:** [TODO]
+- **Code style:** [TODO — formatter? linter?]
+
+---
+
+## Out of scope / forbidden [PRE-DECIDED + TODO]
+
+- No PayHub features beyond webhook receipt and the event types described in the PRD (`payment.*`, `subscription.*`, `refund.*`, per PRD non-goals).
+- No customer-facing UI (per PRD non-goals).
+- No raw event payload stored outside the approved retention store (compliance).
+- No secrets in the repo — use environment variables, document them in `README.md`.
+- No commits to `main` without human review.
+- [TODO: anything else flagged during workshop]
+
+---
+
+## Build & test [TODO]
+
+- **Build:** [TODO once stack finalised — likely `mvn verify` at repo root]
+- **Run hot path locally:** [TODO]
+- **Run full stack locally:** [TODO — likely `docker-compose` for DB]
+- **Run tests:** [TODO]
+
+---
+
+## Where to find more
+
+- [`PRD.md`](./PRD.md) — the brief from the PM
+- [`README.md`](./README.md) — workshop framing and agenda
