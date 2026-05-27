@@ -42,6 +42,25 @@ This split is deliberate. Left alone, Claude Code would default to Spring Boot f
 
 ---
 
+## The dev team (pre-built agents)
+
+The repo ships with a small dev team of Claude Code subagents under [`.claude/agents/`](./.claude/agents). They are deliberately generic — not tied to webhooks, PayHub, or this PRD — so you can lift them into your own projects after the workshop. Each one has an explicit *Human-in-the-Loop discipline* section that says when it must stop, what it must escalate, and what it must never decide alone.
+
+| Agent | Role |
+|---|---|
+| [`product-owner`](./.claude/agents/product-owner.md) | Owns the *what* and *why*. PRD stewardship, user stories, acceptance criteria, prioritization. Refuses to silently resolve open product questions. |
+| [`project-manager`](./.claude/agents/project-manager.md) | Owns *when*, *how much*, *who*. Scope, schedule, dependencies, risk. Pushes back on unrealistic timelines instead of absorbing them. |
+| [`solution-architect`](./.claude/agents/solution-architect.md) | Owns system shape. Design proposals, ADRs, trade-off analysis. Honours documented architectural constraints absolutely. |
+| [`backend-developer`](./.claude/agents/backend-developer.md) | Implements services and APIs. Modern Java 21 + Spring Boot 3 leaning, polyglot-aware. Reads docs before assuming the build system. |
+| [`devops-engineer`](./.claude/agents/devops-engineer.md) | CI/CD, containers, GitOps, Kubernetes, IaC, observability, on-call. Treats reversibility as a first-class property. |
+| [`qa-lead`](./.claude/agents/qa-lead.md) | Test strategy, risk-based planning, quality gates, exit criteria. Refuses to be a rubber stamp. |
+| [`qa-engineer`](./.claude/agents/qa-engineer.md) | Hands-on test design and automation (UI, API, contract, performance, accessibility, resilience). Reproduces before reporting. |
+| [`code-reviewer`](./.claude/agents/code-reviewer.md) | Pre-merge review for correctness, security, performance, observability, and documented-rule compliance. Severity-classified, evidence-based feedback. |
+
+These agents do not magically build the system for you. They are scaffolding that makes the HITL beats visible — each one will *propose*, then *pause*, at the moments that matter. The workshop's `CLAUDE.md` is what gives them their marching orders for this specific project.
+
+---
+
 ## Agenda (2 hours)
 
 | Time | Block | What happens |
@@ -100,3 +119,4 @@ The artifact is small. The discipline is the point.
 - [`PRD.md`](./PRD.md) — Maria's PRD. The brief.
 - [`CLAUDE.md.template`](./CLAUDE.md.template) — the scaffold we will fill in together.
 - `CLAUDE.md` — your filled-in version, generated during the workshop.
+- [`.claude/agents/`](./.claude/agents) — the pre-built dev team (Product Owner, Project Manager, Solution Architect, Backend Developer, DevOps Engineer, QA Lead, QA Engineer, Code Reviewer). Generic, reusable, HITL-disciplined.
