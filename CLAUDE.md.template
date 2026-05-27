@@ -96,3 +96,4 @@ Before any of the following, present 2–3 options to the human with trade-offs,
 
 - [`PRD.md`](./PRD.md) — the brief from the PM
 - [`README.md`](./README.md) — workshop framing and agenda
+- [`.claude/agents/`](./.claude/agents/) — role-shaped subagents (PO, PM, architect, developer, DevOps, QA lead, QA engineer, reviewer) — each with its own HITL discipline and tool boundaries
