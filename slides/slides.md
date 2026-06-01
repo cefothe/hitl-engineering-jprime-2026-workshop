@@ -491,6 +491,72 @@ Splitting work across role-shaped agents doesn't make the system safer by making
 
 <!-- _class: title -->
 
+# The Pipeline
+## PRD → epic → stories → done
+### A human gate on every arrow
+
+---
+
+## The flow
+
+| Step | Command | Writes | Gate |
+|---|---|---|---|
+| 1 | `/prd:review` | analysis | classify open Qs: blocking / deferrable |
+| 2 | `/prd:to-epic` | epic | architecture decisions (data store, ordering) |
+| 3 | `/epic:decompose` | stories | identity mapping, assumed ACs |
+| 4 | `/epic:estimate` | estimate | accept / cut scope / move date |
+| 5 | `/story:start` | tasks discovered | **Loop 2** — in-code questions |
+| 6 | `/story:complete` · `/epic:done` | status → complete | done = evidence, not assertion |
+
+> All artifacts land in `work/` as plain markdown. Diffable in a PR. Take-home after the workshop.
+
+---
+
+## The four-step macro
+
+Every gate, every time:
+
+1. **DETECT** — name the boundary. *"We're about to choose the data store."*
+2. **PROPOSE** — 2–3 concrete options with trade-offs. Never one option dressed as a question.
+3. **DECIDE — BLOCK** — `AskUserQuestion`. The command halts. No *"I'll assume X for now."*
+4. **RECORD** — ADR in `work/decisions/NNNN-*.md`. Linked from the artifact's `hitl:` list.
+
+> The **command** owns the BLOCK. Agents are advisory — they cannot put a question to the room, and they cannot write the artifact and skip the stop.
+
+---
+
+<!-- _class: split -->
+
+## Two loops, one protocol
+
+<div class="col">
+
+### Loop 1 — Decomposition
+*Things that block **planning**.*
+
+`/prd:to-epic` · `/epic:decompose`
+
+→ data store, retention period, identity mapping.
+
+</div>
+
+<div class="col">
+
+### Loop 2 — Implementation
+*Things visible **only in the code**.*
+
+`/story:start`
+
+→ "this slice assumes X — true?" Invisible until the developer opens the story.
+
+A story's `hitl:` list growing *after* `/story:start` is the visible proof loop 2 fired.
+
+</div>
+
+---
+
+<!-- _class: title -->
+
 # The Toolbelt
 ## Making the agent context-efficient, deterministic, and persistent
 
