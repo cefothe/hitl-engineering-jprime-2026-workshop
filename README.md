@@ -207,7 +207,7 @@ while cutting wasted cycles:
 | 0:00–0:05 | Welcome | API keys handed out, setup check |
 | 0:05–0:20 | PRD walkthrough | Read the PRD together. Surface 2 real issues live. |
 | 0:20–0:55 | Build `CLAUDE.md` | Section by section, with the room. ~35 min. |
-| 0:55–1:40 | Drive Claude Code | Build the receiver. HITL beats fire naturally. |
+| 0:55–1:40 | Run the pipeline | `/prd:review` → `/prd:to-epic` → `/epic:decompose` → `/epic:estimate` → `/story:start`. Each command pauses at the gate it owns. See the flow diagram above. |
 | 1:40–1:55 | Wrap-up | Take-home, principles, Q&A |
 | 1:55–2:00 | Buffer | |
 
@@ -243,11 +243,18 @@ These are not staged. They emerge from the PRD itself.
 
 ## After the workshop
 
-The `CLAUDE.md` you walk away with is yours. The same shape works for your projects:
+The `CLAUDE.md` you walk away with is yours — and so is the rest of `.claude/`: the
+pipeline commands, the dev team, the HITL protocol, the templates. Drop the repo into
+another project, point the pipeline at *its* `CLAUDE.md`, and the same gates fire on
+*that* project's decisions. **The heading contract is the API.**
 
-1. Decide what you want the agent to *assume* (architecture, conventions, forbidden patterns)
-2. Decide what you want it to *ask* (the HITL checkpoints)
-3. Decide what you want it to *refuse* (the boundaries)
+The same three-step recipe makes any `CLAUDE.md` work with the pipeline:
+
+1. Decide what you want the agent to *assume* — under `## Architecture constraints`.
+2. Decide what you want it to *ask* — under `## HITL checkpoints`.
+3. Decide what you want it to *refuse* — out-of-scope and forbidden patterns.
+
+The pipeline reads those headings literally. Change them and the gates change with them.
 
 The artifact is small. The discipline is the point.
 

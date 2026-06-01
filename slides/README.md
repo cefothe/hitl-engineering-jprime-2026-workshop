@@ -26,5 +26,6 @@ Install the **Marp for VS Code** extension — gives you a live side-by-side pre
 
 ## Files
 
-- `slides.md` — the deck (Marp markdown, `theme: gaia`)
+- `slides.md` — the deck (Marp markdown with a custom inline theme — warm palette, no Gaia)
+- `slides.pdf` — pre-built PDF for offline viewing
 - `README.md` — this file
