@@ -48,7 +48,7 @@ Before any of the following, present 2–3 options to the human with trade-offs,
 - **Choosing the data store** (Postgres? SQLite? Embedded H2? Something else?)
 - **Designing PayHub `customer_id` → internal `user_id` mapping** (does the mapping exist? How is it populated? What happens to orphans?)
 - **Deciding event retention period** (the PRD says *"a while"* — that is not an answer)
-- **Adding any logic that handles out-of-order events** (architectural fork — needs human input)
+- **Deciding whether out-of-order events matter — and if so, how** (the PRD raises this as an open question; deciding *no* by silently writing no ordering logic is still a decision and still STOPs — gate the decision, not just the act of adding code)
 - **Claiming the work is done** (verify against the PRD's success metrics before declaring victory)
 
 ---
