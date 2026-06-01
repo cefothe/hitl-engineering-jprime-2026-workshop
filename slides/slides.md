@@ -662,13 +662,25 @@ Or just watch. Repo is public — replay everything after.
 
 ## After the workshop
 
-The `CLAUDE.md` you walk away with is **yours**. The same shape works for your projects:
+The `CLAUDE.md` you walk away with is **yours** — and so is `.claude/`: pipeline, agents, rules, templates. Drop the repo into any project. **The heading contract is the API.**
 
-1. Decide what the agent should **assume** — architecture, conventions, forbidden patterns
-2. Decide what it should **ask** — the HITL checkpoints
-3. Decide what it should **refuse** — the boundaries
+The same three-step recipe makes any `CLAUDE.md` work:
+
+1. Decide what the agent should **assume** — `## Architecture constraints`
+2. Decide what it should **ask** — `## HITL checkpoints`
+3. Decide what it should **refuse** — out-of-scope and forbidden patterns
 
 > The artifact is small. The discipline is the point.
+
+---
+
+## If you remember nothing else
+
+- **Stop the agent in code, not in prompts.** Commands own the BLOCK; tool grants enforce the boundary.
+- **Headings are the contract.** The pipeline reads `## HITL checkpoints` and `## Architecture constraints` literally — drop it into any repo.
+- **Every gate produces an ADR.** Decisions outlive the meeting. The audit trail IS the discipline.
+
+> Make the discipline structural. The rest takes care of itself.
 
 ---
 
