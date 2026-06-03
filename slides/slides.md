@@ -605,10 +605,10 @@ Local-first codebase index engine. Builds a semantic index on your machine — n
 **Rust Token Killer.** A single Rust binary installed as a Claude Code `PreToolUse` hook.
 
 Transparently compresses noisy Bash output **before** it reaches the model:
-`cargo test` · `git status` · `find` · `grep` · `npm` · `docker` · `kubectl`
+`vitest` · `jest` · `eslint` · `cargo test` · `kubectl` · `git diff` · `playwright`
 
-> `cargo test` with 262 passing tests: **4,823 → 11 tokens.**
-> Average savings across 2,900+ commands: **~89%.**
+> **~555M tokens saved — 85.5%**, across ~72.5K commands *(projected, all environments)*.
+> Top hit: `vitest run` — **95.9%** saved.
 
 **Why HITL cares:** longer sessions, cheaper iterations, less context pollution between human review cycles.
 
