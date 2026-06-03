@@ -1,0 +1,16 @@
+# Maven build output
+target/
+
+# macOS
+.DS_Store
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# Secrets — never commit real keys
+.env
+.env.local
+*.env
+!.env.example

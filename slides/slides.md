@@ -344,6 +344,16 @@ Stefan Angelov · Lyubomir Bozhinov
 
 ---
 
+<!-- _class: title -->
+
+## Scan to follow along
+
+![w:320](url_qrcodecreator.com_11_19_40.png)
+
+Open the workshop repo — clone it, or just replay every step afterwards
+
+---
+
 <!-- _class: split -->
 
 ## Your guides today
