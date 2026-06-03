@@ -263,6 +263,7 @@ The artifact is small. The discipline is the point.
 ## Files in this repo
 
 - [`PRD.md`](./PRD.md) — Maria's PRD. The brief.
+- [`HOTPATH_README.md`](./HOTPATH_README.md) — the pure-Java hot-path receiver (prd/002): required env vars (`PAYHUB_DB_URL`, `PAYHUB_DB_USER`, `PAYHUB_DB_PASSWORD`), how to start Postgres, and the `mvn` build/run commands.
 - [`CLAUDE.md.template`](./CLAUDE.md.template) — the scaffold we will fill in together.
 - `CLAUDE.md` — your filled-in version, generated during the workshop.
 - [`.claude/agents/`](./.claude/agents) — the pre-built dev team (Product Owner, Project Manager, Solution Architect, Backend Developer, DevOps Engineer, QA Lead, QA Engineer, Code Reviewer). Generic, reusable, HITL-disciplined.

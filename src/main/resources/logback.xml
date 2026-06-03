@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Hot-path logging. Console appender with a compact pattern.
+
+  PII rule (CLAUDE.md): the application code never passes the raw payload or any
+  bound JDBC parameter to a logger, so nothing here can emit PII. Keep it that
+  way — do not add request/response body logging.
+-->
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} %-5level [%thread] %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Helidon and HikariCP are chatty at DEBUG; keep them at INFO. -->
+    <logger name="io.helidon" level="INFO"/>
+    <logger name="com.zaxxer.hikari" level="INFO"/>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>
